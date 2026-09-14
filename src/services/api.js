@@ -12,6 +12,114 @@ let cachedRentals = null;
 let cachedProjects = null;
 let cachedStats = null;
 
+const HOME_IMAGE_LIBRARY = {
+  apartment: [
+    'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1200&q=80'
+  ],
+  villa: [
+    'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1600047509807-bca35d5f3d8d?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1600573472591-5a5df2c7dcb4?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1576941089067-2de3c901e126?auto=format&fit=crop&w=1200&q=80'
+  ],
+  'independent house': [
+    'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1597047084897-51e81819a499?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80'
+  ],
+  'builder floor': [
+    'https://images.unsplash.com/photo-1600573472591-5a5df2c7dcb4?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1572120360610-d971b9d7767c?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1600047509807-bca35d5f3d8d?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1460317442991-0ec209397118?auto=format&fit=crop&w=1200&q=80'
+  ],
+  plot: [
+    'https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1473448912268-2022ce9509d8?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1448630360428-65456885c650?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1600573472591-5a5df2c7dcb4?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1576941089067-2de3c901e126?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1600047509807-bca35d5f3d8d?auto=format&fit=crop&w=1200&q=80'
+  ],
+  default: [
+    'https://images.unsplash.com/photo-1494526585095-c41746248156?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1484154218962-a197022b5858?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=1200&q=80',
+    'https://images.unsplash.com/photo-1501183638710-841dd1904471?auto=format&fit=crop&w=1200&q=80'
+  ]
+};
+
+const normalizePropertyType = (propertyType) => {
+  const normalized = (propertyType || '').toLowerCase().trim();
+
+  if (['apartment', 'flat', 'studio apartment', 'penthouse'].includes(normalized)) {
+    return 'apartment';
+  }
+
+  if (['villa', 'luxury villa'].includes(normalized)) {
+    return 'villa';
+  }
+
+  if (['independent house', 'house', 'family house'].includes(normalized)) {
+    return 'independent house';
+  }
+
+  if (['builder floor', 'builder-floor', 'townhouse'].includes(normalized)) {
+    return 'builder floor';
+  }
+
+  if (['plot', 'land', 'plot land'].includes(normalized)) {
+    return 'plot';
+  }
+
+  return 'default';
+};
+
+const enrichListingsWithImages = (listings = []) => {
+  return listings.map((listing, index) => {
+    if (listing.image) {
+      return listing;
+    }
+
+    const propertyType = normalizePropertyType(listing.property_type);
+    const sourcePool = HOME_IMAGE_LIBRARY[propertyType] || HOME_IMAGE_LIBRARY.default;
+    const seed = Array.from(listing.listing_id || `${listing.apartment_name || 'listing'}-${index}`)
+      .reduce((sum, char) => sum + char.charCodeAt(0), 0);
+    const imageIndex = Math.abs(seed + (listing.price || 0) + index) % sourcePool.length;
+
+    return {
+      ...listing,
+      image: sourcePool[imageIndex]
+    };
+  });
+};
+
 export const api = {
   // --- AUTH FLOWS ---
   async login(email, password) {
@@ -159,7 +267,8 @@ export const api = {
   async getAllListings() {
     if (cachedListings) return cachedListings;
     const res = await fetch('/data/listings.json');
-    cachedListings = await res.json();
+    const rawListings = await res.json();
+    cachedListings = enrichListingsWithImages(rawListings);
     return cachedListings;
   },
 
