@@ -1,0 +1,17 @@
+{
+  "total_listings": 4700,
+  "active_listings": 3722,
+  "inactive_listings": 978,
+  "total_rentals": 1900,
+  "total_projects": 520,
+  "whitefield_monthly_rent": 7158600,
+  "city": "Bangalore",
+  "assigned_locality": "Whitefield",
+  "avg_price_sqft_2bhk": 11496.64,
+  "costliest_project": {
+    "project_id": "P10255",
+    "name": "Puravankara Vista",
+    "price_max_inr": 48900000,
+    "price_max_crores": 4.89
+  }
+}
